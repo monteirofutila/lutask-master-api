@@ -46,6 +46,11 @@ class UserRepository implements RepositoryInterface
         return $this->model->find($id)->delete();
     }
 
+    public function deleteTask(string $id, $taskID)
+    {
+        return $this->model->find($id)->tasks->find($taskID)->delete();
+    }
+
     public function new(array $data): Model
     {
         return $this->model->create($data);

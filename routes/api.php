@@ -26,9 +26,8 @@ Route::post('auth/logout', [App\Http\Controllers\LoginController::class, 'logout
 
 //Route::resource('tasks', App\Http\Controllers\TaskController::class)->middleware(['auth:sanctum']);
 
-Route::get('users/{userID}/tasks/{all?}', [App\Http\Controllers\UserTaskController::class, 'list'])->middleware(['auth:sanctum']);
-Route::post('users/{userID}/tasks', [App\Http\Controllers\UserTaskController::class, 'list'])->middleware(['auth:sanctum']);
-Route::get('users/{userID}/tasks/{taskID}', [App\Http\Controllers\UserTaskController::class, 'list'])->middleware(['auth:sanctum']);
-Route::delete('users/{userID}/tasks/{taskID}', [App\Http\Controllers\UserTaskController::class, 'list'])->middleware(['auth:sanctum']);
-Route::patch('users/{userID}/tasks/{taskID}/complete', [App\Http\Controllers\UserTaskController::class, 'list'])->middleware(['auth:sanctum']);
-Route::patch('users/{userID}/tasks/{taskID}/next', [App\Http\Controllers\UserTaskController::class, 'list'])->middleware(['auth:sanctum']);
+Route::get('users/{userID}/tasks/{all?}', [App\Http\Controllers\TaskUserController::class, 'list'])->middleware(['auth:sanctum']);
+Route::post('users/{userID}/tasks', [App\Http\Controllers\TaskUserController::class, 'add'])->middleware(['auth:sanctum']);
+Route::delete('users/{userID}/tasks/{taskID}', [App\Http\Controllers\TaskUserController::class, 'delete'])->middleware(['auth:sanctum']);
+Route::patch('users/{userID}/tasks/{taskID}/complete', [App\Http\Controllers\TaskUserController::class, 'list'])->middleware(['auth:sanctum']);
+Route::get('users/{userID}/tasks/next', [App\Http\Controllers\TaskUserController::class, 'list'])->middleware(['auth:sanctum']);

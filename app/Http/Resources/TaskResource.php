@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -19,11 +20,11 @@ class TaskResource extends JsonResource
             'id' => $this->id,
             "attributes" => [
                 'description' => $this->description,
+                'age' => Carbon::parse($this->created_at)->diffForHumans(),
                 'status' => $this->status,
                 'priority' => $this->priority,
-                'created_at' => $this->created_at,
-                'updated_at' => $this->updated_at,
             ],
+
         ];
     }
 }
