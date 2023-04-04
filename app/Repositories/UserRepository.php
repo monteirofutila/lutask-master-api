@@ -16,48 +16,53 @@ class UserRepository implements RepositoryInterface
         return $this->model->all();
     }
 
-    public function listTask(string $id)
+    public function listTask(string $userID)
     {
-        return $this->model->find($id)->tasks()->where('status', 'pending')->get();
+        return $this->model->find($userID)->tasks()->where('status', 'pending')->get();
     }
 
-    public function listTaskAll(string $id)
+    public function listTaskAll(string $userID)
     {
-        return $this->model->find($id)->tasks;
+        return $this->model->find($userID)->tasks;
     }
 
-    public function findById(string $id): Model
+    public function findById(string $userID): Model|null
     {
-        return $this->model->find($id);
+        return $this->model->find($userID);
     }
 
-    public function findByEmail(string $email)
+    public function findByEmail(string $email): Model|null
     {
         return $this->model->where('email', $email)->first();
     }
 
-    public function findByUserName(string $userName)
+    public function findByUserName(string $userName): Model
     {
         return $this->model->where('user_name', $userName)->first();
     }
 
-    public function delete(string $id)
+    public function delete(string $userID)
     {
-        return $this->model->find($id)->delete();
+        return $this->model->find($userID)->delete();
     }
 
-    public function deleteTask(string $id, $taskID)
+    public function deleteTask(string $userID, string $taskID)
     {
-        return $this->model->find($id)->tasks->find($taskID)->delete();
+        return $this->model->find($userID)->tasks->find($taskID)->delete();
     }
 
     public function new(array $data): Model
     {
-        return $this->model->create($data);
+        return $this->model->firstOrcreate($data)->refresh();
     }
 
-    public function update(string $id, array $data): Model
+    public function addTask(string $userID, array $data): Model
     {
-        return $this->model->find($id)->update($data);
+        return $this->model->find($userID)->tasks()->create($data)->refresh();
+    }
+
+    public function update(string $userID, array $data): Model
+    {
+        return $this->model->find($userID)->update($data);
     }
 }

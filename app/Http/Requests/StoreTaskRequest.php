@@ -23,7 +23,7 @@ class StoreTaskRequest extends FormRequest
     {
         return [
             //
-            'description' => 'required',
+            'description' => 'required|string',
             'priority' => 'nullable|in:high,normal,low',
         ];
     }

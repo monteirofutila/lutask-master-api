@@ -12,25 +12,24 @@ class TaskUserController extends Controller
     {
     }
 
-    public function list(string $userID, string $all = null)
+    public function listTask(string $userID, string $all = null)
     {
         //
-        $data = $this->service->list($userID, $all);
+        $data = $this->service->listTask($userID, $all);
         return TaskResource::collection($data);
     }
 
-
-    public function store(StoreTaskRequest $request)
+    public function addTask(string $userID, StoreTaskRequest $request)
     {
         $data = $request->validated();
-        $task = $this->service->new($data);
+        $task = $this->service->addTask($userID, $data);
         return new TaskResource($task);
     }
 
-    public function delete(string $userID, string $taskID)
+    public function deleteTask(string $userID, string $taskID)
     {
         //
-        $data = $this->service->delete($userID, $taskID);
+        $data = $this->service->deleteTask($userID, $taskID);
         if ($data) {
             return response()->json(['message' => 'Eliminado com sucesso!'], 204);
         } else {

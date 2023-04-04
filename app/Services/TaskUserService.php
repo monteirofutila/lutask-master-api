@@ -10,7 +10,7 @@ class TaskUserService
     {
     }
 
-    public function list($userID, $all)
+    public function listTask(string $userID, string $all)
     {
         if ($all) {
             return $this->repository->listTaskAll($userID);
@@ -19,7 +19,13 @@ class TaskUserService
         }
     }
 
-    public function delete(string $userID, $taskID)
+    public function addTask(string $userID, array $data)
+    {
+        $data['priority'] = $data['priority'] ?? 'normal';
+        return $this->repository->addTask($userID, $data);
+    }
+
+    public function deleteTask(string $userID, string $taskID)
     {
         return $this->repository->deleteTask($userID, $taskID);
     }

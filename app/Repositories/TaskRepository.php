@@ -29,7 +29,7 @@ class TaskRepository implements RepositoryInterface
     public function new(array $data): Model
     {
         $user = auth()->user();
-        $task = $user->tasks()->firstOrCreate($data);
+        $task = $user->tasks()->firstOrCreate($data)->refresh();
         return $task;
     }
 
