@@ -26,6 +26,12 @@ class TaskUserController extends Controller
         return new TaskResource($task);
     }
 
+    public function completeTask(string $userID, string $taskID)
+    {
+        $task = $this->service->completeTask($userID, $taskID);
+        return new TaskResource($task);
+    }
+
     public function deleteTask(string $userID, string $taskID)
     {
         //

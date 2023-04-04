@@ -65,4 +65,12 @@ class UserRepository implements RepositoryInterface
     {
         return $this->model->find($userID)->update($data);
     }
+
+    public function completeTask(string $userID, string $taskID): Model
+    {
+        $task = $this->model->find($userID)->tasks->find($taskID);
+        $task->status = 'done';
+        $task->save();
+        return $task->refresh();
+    }
 }
