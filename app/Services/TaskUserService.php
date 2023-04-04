@@ -10,13 +10,22 @@ class TaskUserService
     {
     }
 
-    public function listTask(string $userID, string|null $all)
+    public function listTask(string $userID, string|null $prefix)
     {
-        if ($all) {
-            return $this->repository->listTaskAll($userID);
-        } else {
-            return $this->repository->listTask($userID);
+        switch ($prefix) {
+            case 'all':
+                $response = $this->repository->listTaskAll($userID);
+                break;
+            case 'next':
+                $response = $this->repository->nextTask($userID);
+                break;
+
+            default:
+                $response = $this->repository->listTask($userID);
+                break;
         }
+
+        return $response;
     }
 
     public function addTask(string $userID, array $data)

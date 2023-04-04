@@ -26,6 +26,11 @@ class UserRepository implements RepositoryInterface
         return $this->model->find($userID)->tasks;
     }
 
+    public function nextTask(string $userID)
+    {
+        return $this->model->find($userID)->tasks()->orderBy('priority')->get();
+    }
+
     public function findById(string $userID): Model|null
     {
         return $this->model->find($userID);

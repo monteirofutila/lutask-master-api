@@ -12,10 +12,10 @@ class TaskUserController extends Controller
     {
     }
 
-    public function listTask(string $userID, string $all = null)
+    public function listTask(string $userID, string $prefix = null)
     {
         //
-        $data = $this->service->listTask($userID, $all);
+        $data = $this->service->listTask($userID, $prefix);
         return TaskResource::collection($data);
     }
 
