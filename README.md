@@ -33,6 +33,6 @@ php artisan migrate:refresh --seed
 php artisan serve
 ```
 
-### Procedure
+### Procedimentos
 1. Primeiro criar uma conta de usuário
 2. Login com as credencias fornecidas
